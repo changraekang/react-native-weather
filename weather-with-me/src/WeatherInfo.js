@@ -9,6 +9,7 @@ import {
   SafeAreaView,
 } from "react-native";
 import React, { useEffect } from "react";
+import CelsiusIcon from "../assets/celsius.svg";
 
 const WeatherInfo = (weatherData) => {
   console.log(weatherData, "정보");
@@ -115,10 +116,20 @@ const WeatherInfo = (weatherData) => {
   const tempMaxC = (temp_max - 273.15).toFixed(1);
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar backgroundColor="darkgray" />{" "}
       <ScrollView>
-        <View style={{ alignItems: "center" }}>
+        <View
+          style={{
+            alignItems: "center",
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "center",
+            width: 250,
+          }}
+        >
           <Text style={styles.title}>{name}</Text>
+          <Text style={styles.currentDescription}>
+            {getKoreanDescription(description)}
+          </Text>
         </View>
         <View style={styles.current}>
           <Image
@@ -127,13 +138,15 @@ const WeatherInfo = (weatherData) => {
               uri: `http://openweathermap.org/img/wn/${icon}@4x.png`,
             }}
           />
-          <Text style={styles.currentTemp}>{tempC} °C</Text>
+          <Text style={styles.currentTemp}>{tempC}</Text>
+          <CelsiusIcon width={100} height={100}></CelsiusIcon>
         </View>
-        <Text style={styles.currentDescription}>
-          {getKoreanDescription(description)}
-        </Text>
+        <Text style={styles.currentDescription}></Text>
         <View style={styles.extraInfo}>
           <View style={styles.info}>
+            <Text style={{ fontSize: 20, color: "white", textAlign: "center" }}>
+              체감온도{" "}
+            </Text>
             <Image
               source={require("../assets/temp.png")}
               style={{
@@ -144,102 +157,7 @@ const WeatherInfo = (weatherData) => {
               }}
             />
             <Text style={{ fontSize: 20, color: "white", textAlign: "center" }}>
-              {feelsLikeC} °C
-            </Text>
-            <Text style={{ fontSize: 20, color: "white", textAlign: "center" }}>
-              Feels Like
-            </Text>
-          </View>
-
-          <View style={styles.info}>
-            <Image
-              source={require("../assets/humidity.png")}
-              style={{
-                width: 40,
-                height: 40,
-                borderRadius: 40 / 2,
-                marginLeft: 50,
-              }}
-            />
-            <Text style={{ fontSize: 20, color: "white", textAlign: "center" }}>
-              {humidity}%
-            </Text>
-            <Text style={{ fontSize: 20, color: "white", textAlign: "center" }}>
-              Humidity
-            </Text>
-          </View>
-        </View>
-        <View style={styles.extraInfo}>
-          <View style={styles.info}>
-            <Image
-              source={require("../assets/visibility.png")}
-              style={{
-                width: 40,
-                height: 40,
-                borderRadius: 40 / 2,
-                marginLeft: 50,
-              }}
-            />
-            <Text style={{ fontSize: 22, color: "white", textAlign: "center" }}>
-              {visibility}
-            </Text>
-            <Text style={{ fontSize: 20, color: "white", textAlign: "center" }}>
-              Visibility
-            </Text>
-          </View>
-
-          <View style={styles.info}>
-            <Image
-              source={require("../assets/windspeed.png")}
-              style={{
-                width: 40,
-                height: 40,
-                borderRadius: 40 / 2,
-                marginLeft: 50,
-              }}
-            />
-            <Text style={{ fontSize: 20, color: "white", textAlign: "center" }}>
-              {speed} m/s
-            </Text>
-            <Text style={{ fontSize: 20, color: "white", textAlign: "center" }}>
-              Wind Speed
-            </Text>
-          </View>
-        </View>
-        <View style={styles.extraInfo}>
-          <View style={styles.info}>
-            <Image
-              source={require("../assets/sunrise.png")}
-              style={{
-                width: 40,
-                height: 40,
-                borderRadius: 40 / 2,
-                marginLeft: 50,
-              }}
-            />
-            <Text style={{ fontSize: 20, color: "white", textAlign: "center" }}>
-              {new Date(sunrise * 1000).toLocaleString()}
-            </Text>
-            <Text style={{ fontSize: 20, color: "white", textAlign: "center" }}>
-              Sunrise
-            </Text>
-          </View>
-
-          <View style={styles.info}>
-            <Image
-              source={require("../assets/sunset.png")}
-              style={{
-                width: 40,
-                height: 40,
-                borderRadius: 40 / 2,
-                marginLeft: 50,
-              }}
-            />
-            <Text style={{ fontSize: 20, color: "white", textAlign: "center" }}>
-              {new Date(sunset * 1000).toLocaleString()}
-            </Text>
-            <Text style={{ fontSize: 20, color: "white", textAlign: "center" }}>
-              Sunset
+              {feelsLikeC} <CelsiusIcon width={100} height={100}></CelsiusIcon>
             </Text>
           </View>
         </View>
@@ -298,10 +216,11 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   title: {
-    width: "100%",
     textAlign: "center",
     fontSize: 36,
     fontWeight: "bold",
     color: "#e96e50",
+    paddingLeft: 100,
+    paddingRight: 30,
   },
 });

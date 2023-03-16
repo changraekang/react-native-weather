@@ -1,5 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
+import IconTest from "./src/IconTest";
 import Test from "./src/Test";
 import Weather from "./src/Weather";
 

@@ -26,7 +26,6 @@ const Weather = () => {
       if (res.status === 200) {
         const data = await res.json();
         setWeatherData(data);
-        console.log(weatherData, "통신");
       } else {
         setWeatherData(null);
       }
